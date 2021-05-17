@@ -4,7 +4,4 @@ This file is used to list changes made in each version of the databricks cookboo
 
 ## 0.1.0
 
-Initial release.
-
-- change 0
-- change 1
+Initial release. Supports files, jobs and instance pools.
