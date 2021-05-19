@@ -1,17 +1,18 @@
 default_action :create
 
 # Hash: Settings for this job
-property :settings, Hash, required: true
+property :settings, Hash
+# Integer: The job ID
+property :job_id, Integer
 
 include DatabricksResource
 
-action :create do
-  ruby_block "Create Databricks job #{new_resource.name}" do
-    block do
-      databricks_api.jobs.create(**new_resource.settings.merge(name: new_resource.name))
-    end
-    not_if do
-      databricks_api.jobs.list.any? { |job_info| job_info.settings['name'] == new_resource.name }
-    end
+databricks_resource_actions(
+  :jobs,
+  :name,
+  :job_id,
+  settings_properties_to_ignore: %i[created_time creator_user_name],
+  update_action: proc do |new_resource|
+    databricks_api.jobs.get(new_resource.job_id).reset(**new_resource.settings.merge(name: new_resource.name))
   end
-end
+)
