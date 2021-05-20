@@ -1,6 +1,5 @@
 # Helpers that are added any Databricks resource class
 module DatabricksResourceClassHelpers
-
   # Register the Databricks API properties needed to select the resource from a list with name and id attributes.
   # If a settings property is to be set, automatically set it from the Databricks resource that is selected.
   #
@@ -27,8 +26,8 @@ module DatabricksResourceClassHelpers
       if found_resource
         # Set the current resource's attributes based on the Databricks resource that has been selected
         name found_resource.send(name_attribute)
-        self.send(id_attribute, found_resource.send(id_attribute))
-        if self.respond_to?(:settings)
+        send(id_attribute, found_resource.send(id_attribute))
+        if respond_to?(:settings)
           properties_to_ignore = [name_attribute, id_attribute] + settings_properties_to_ignore
           settings found_resource.properties.reject { |property, _value| properties_to_ignore.include?(property) }
         end
@@ -68,15 +67,12 @@ module DatabricksResourceClassHelpers
         new_resource_name = new_resource.name
         if new_resource_id.nil?
           databricks_api.send(resource_type).create(**new_resource.settings.merge(name_attribute => new_resource_name))
+        elsif update_action.nil?
+          databricks_api.send(resource_type).get(new_resource_id).reset(**new_resource.settings.merge(name_attribute => new_resource_name))
         else
-          if update_action.nil?
-            databricks_api.send(resource_type).get(new_resource_id).reset(**new_resource.settings.merge(name_attribute => new_resource_name))
-          else
-            update_action.call(new_resource)
-          end
+          update_action.call(new_resource)
         end
       end
     end
   end
-
 end

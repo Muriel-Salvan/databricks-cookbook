@@ -61,4 +61,15 @@ end
 
 ## Development
 
-TODO: Setup tests/build and document them.
+### Development workflow
+
+A standard PR-based development workflow is applied to this repository, using a single master release branch and linear strategy.
+
+If you want to contribute to the code, please create a fork of the repository in your Github's user space, then push a branch with your modifications on your fork and create a PR from it to the master branch on the main repository.
+
+### Testing
+
+Lint testing can be done using Chef's `delivery` tool:
+```bash
+/opt/chef-workstation/bin/delivery local lint
+```

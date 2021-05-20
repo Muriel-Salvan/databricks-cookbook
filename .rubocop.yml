@@ -1,0 +1,7 @@
+# Chef cookstyle incorrectly reports %i and %w operators using [ ] instead of ()
+# cf https://github.com/chef/cookstyle/issues/836
+# TODO: Remove those excludes when Cookstyle will be fixed.
+Style/PercentLiteralDelimiters:
+  Exclude:
+    - 'resources/instance_pool.rb'
+    - 'resources/job.rb'
