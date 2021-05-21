@@ -1,7 +1,43 @@
+# Configuration parameters: EnforcedStyle, IndentationWidth.
+# SupportedStyles: with_first_parameter, with_fixed_indentation
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+# Configuration parameters: EnforcedStyle, IndentationWidth.
+# SupportedStyles: with_first_parameter, with_fixed_indentation
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: leading, trailing
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: empty_lines, no_empty_lines
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: empty_lines, empty_lines_except_namespace, empty_lines_special, no_empty_lines
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines
+
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: empty_lines, empty_lines_except_namespace, empty_lines_special, no_empty_lines
+Layout/EmptyLinesAroundModuleBody:
+  EnforcedStyle: empty_lines
+
 # Chef cookstyle incorrectly reports %i and %w operators using [ ] instead of ()
 # cf https://github.com/chef/cookstyle/issues/836
 # TODO: Remove those excludes when Cookstyle will be fixed.
 Style/PercentLiteralDelimiters:
-  Exclude:
-    - 'resources/instance_pool.rb'
-    - 'resources/job.rb'
+  Enabled: false
+
+# Don't enforce trailing commas in Hashes, as it makes copy/pasting JSON a pain.
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+# Don't enforce trailing commas in Arrays for consistency with Hashes.
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false

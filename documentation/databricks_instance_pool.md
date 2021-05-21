@@ -13,7 +13,6 @@ Handles a [Databricks instance pool](https://docs.databricks.com/clusters/instan
 | Name | Type | Default | Description | Allowed Values |
 | --- | --- | --- | --- | --- |
 | `name` (default) | String | None | Instance pool name | Any pool name |
-| `instance_pool_id` | String | Retrieved from the API from the name | Instance pool ID | Any Databricks instance pool ID |
 | `settings` | Hash | None | Settings to be given to the instance pool creation Databricks API | Any setting as documented by the [Databricks Instance Pools API](https://docs.databricks.com/dev-tools/api/latest/instance-pools.html#create) |
 | `host` | String | Host defined by `on_databricks` helper | Databricks host to connect to. | Any URL |
 | `token` | String | Token defined by `on_databricks` helper | Databricks token used to connect to the REST API 2.0. | Any token |

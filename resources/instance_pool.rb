@@ -2,8 +2,6 @@ default_action :create
 
 # Hash: Settings for this instance pool
 property :settings, Hash
-# String: The instance pool ID
-property :instance_pool_id, String
 
 include DatabricksResource
 

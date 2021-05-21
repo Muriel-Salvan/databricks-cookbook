@@ -29,8 +29,8 @@ end
 action :create do
   converge_if_changed do
     databricks_api.dbfs.put(
-      name,
-      run_context.cookbook_collection[cookbook_name].preferred_filename_on_disk_location(run_context.node, :files, source)
+      new_resource.name,
+      run_context.cookbook_collection[cookbook_name].preferred_filename_on_disk_location(run_context.node, :files, new_resource.source)
     )
   end
 end

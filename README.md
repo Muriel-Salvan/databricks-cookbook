@@ -73,3 +73,14 @@ Lint testing can be done using Chef's `delivery` tool:
 ```bash
 /opt/chef-workstation/bin/delivery local lint
 ```
+
+Unit testing can be done using Chefspec.
+Unit testing needs [webmock](https://github.com/bblimke/webmock) to run, so you will have to install it as part of your Chef workstation's gems:
+```bash
+/opt/chef-workstation/embedded/bin/gem install webmock
+```
+
+Then unit tests can be run like this:
+```bash
+/opt/chef-workstation/bin/chef exec rspec
+```
