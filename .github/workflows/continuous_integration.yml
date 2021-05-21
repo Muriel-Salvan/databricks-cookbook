@@ -36,7 +36,7 @@ jobs:
           CHEF_LICENSE: accept-no-persist
 
       - name: Run unit tests
-        run: chef exec rspec
+        run: chef exec rspec --format documentation
         env:
           CHEF_LICENSE: accept-no-persist
 

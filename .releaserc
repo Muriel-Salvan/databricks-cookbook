@@ -2,7 +2,7 @@
   "plugins": [
     ["@semantic-release/exec", {
       "analyzeCommitsCmd": "sem_ver_git --from \"${lastRelease.gitTag}\" --output semantic_release_analyze | tail -n 1",
-      "verifyReleaseCmd": "sed -i \"s/version '.*'/^version '${nextRelease.version}'/g\" metadata.rb",
+      "verifyReleaseCmd": "sed -i \"s/^version '.*'/version '${nextRelease.version}'/g\" metadata.rb",
       "generateNotesCmd": "sem_ver_git --from \"${lastRelease.gitTag}\" --output semantic_release_generate_notes",
       "publishCmd": "knife supermarket share databricks --config publish_config.rb --cookbook-path .."
     }],
