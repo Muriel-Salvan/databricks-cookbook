@@ -22,6 +22,8 @@ TODO: Compile the exact list when Test Kitchen will be fully configured.
 
 ## Resources
 
+The following resources are available in this cookbook:
+
 - [databricks_file](documentation/databricks_file.md)
 - [databricks_job](documentation/databricks_job.md)
 - [databricks_instance_pool](documentation/databricks_instance_pool.md)
@@ -36,6 +38,7 @@ If you want to group all resources accessed under the same host and token, you c
 Then resources defined in such a scope will use the given host and token as default values.
 
 Example:
+
 ```ruby
 on_databricks('https://my-databricks.net', 'my-token') do
 
@@ -70,20 +73,25 @@ If you want to contribute to the code, please create a fork of the repository in
 ### Testing
 
 Lint testing can be done using Chef's `delivery` tool:
+
 ```bash
 /opt/chef-workstation/bin/delivery local lint
 ```
 
 Unit testing can be done using Chefspec.
 Several dependent Rubygems are required for unit testing to run:
+
 * [webmock](https://github.com/bblimke/webmock)
 * All cookbook dependencies described in [metadata.rb](https://github.com/Muriel-Salvan/databricks-cookbook/blob/master/metadata.rb)
+
 You can install those dependencies for tests using `chef gem install`:
+
 ```bash
 /opt/chef-workstation/bin/chef gem install webmock diffy databricks
 ```
 
 Then unit tests can be run like this:
+
 ```bash
 /opt/chef-workstation/bin/chef exec rspec
 ```
@@ -92,6 +100,7 @@ Then unit tests can be run like this:
 
 Publishing is done using `knife supermarket share` and requires a publisher's key to work.
 It is also needed to have the cookbook directory named `databricks` for publishing to occur with knife:
+
 ```bash
 /opt/chef-workstation/bin/knife supermarket share databricks --cookbook-path ..
 ```
