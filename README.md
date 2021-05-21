@@ -75,12 +75,23 @@ Lint testing can be done using Chef's `delivery` tool:
 ```
 
 Unit testing can be done using Chefspec.
-Unit testing needs [webmock](https://github.com/bblimke/webmock) to run, so you will have to install it as part of your Chef workstation's gems:
+Several dependent Rubygems are required for unit testing to run:
+* [webmock](https://github.com/bblimke/webmock)
+* All cookbook dependencies described in [metadata.rb](https://github.com/Muriel-Salvan/databricks-cookbook/blob/master/metadata.rb)
+You can install those dependencies for tests using `chef gem install`:
 ```bash
-/opt/chef-workstation/embedded/bin/gem install webmock
+/opt/chef-workstation/bin/chef gem install webmock diffy databricks
 ```
 
 Then unit tests can be run like this:
 ```bash
 /opt/chef-workstation/bin/chef exec rspec
+```
+
+### Publishing
+
+Publishing is done using `knife supermarket share` and requires a publisher's key to work.
+It is also needed to have the cookbook directory named `databricks` for publishing to occur with knife:
+```bash
+/opt/chef-workstation/bin/knife supermarket share databricks --cookbook-path ..
 ```
