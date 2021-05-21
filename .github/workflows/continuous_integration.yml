@@ -40,30 +40,30 @@ jobs:
         env:
           CHEF_LICENSE: accept-no-persist
 
-  #     - name: Test packaging
-  #       run: bundle exec gem build databricks.gemspec
+  semantic_release:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
 
-  # semantic_release:
-  #   needs: test
-  #   runs-on: ubuntu-latest
-  #   steps:
+      - name: Check-out code
+        uses: actions/checkout@v2
 
-  #     - name: Check-out code
-  #       uses: actions/checkout@v2
+      - name: Install Chef
+        uses: actionshub/chef-install@master
 
-  #     - name: Install Ruby
-  #       uses: actions/setup-ruby@v1
+      - name: Install Node
+        uses: actions/setup-node@v2
 
-  #     - name: Install Node
-  #       uses: actions/setup-node@v2
+      - name: Install semantic-release
+        run: npm install @semantic-release/git @semantic-release/changelog @semantic-release/exec -D
 
-  #     - name: Install semantic-release
-  #       run: npm install @semantic-release/git @semantic-release/changelog @semantic-release/exec semantic-release-rubygem -D
+      - name: Install sem_ver_components
+        run: sudo gem install sem_ver_components
 
-  #     - name: Install dependencies
-  #       run: bundle install
+      - name: Generate key
+        run: echo "${CHEF_SUPERMARKET_KEY}" >supermarket.key
+        env:
+          CHEF_SUPERMARKET_KEY: ${{secrets.CHEF_SUPERMARKET_KEY}}
 
-  #     - name: Semantic releasing
-  #       run: npx semantic-release
-  #       env:
-  #         GEM_HOST_API_KEY: ${{secrets.GEM_HOST_API_KEY}}
+      - name: Semantic releasing
+        run: npx semantic-release
