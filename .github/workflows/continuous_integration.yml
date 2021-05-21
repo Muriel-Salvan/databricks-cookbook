@@ -1,0 +1,69 @@
+name: continuous-integration
+on:
+  - push
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check-out code
+        uses: actions/checkout@v2
+
+      - name: Install Chef
+        uses: actionshub/chef-install@master
+
+      - name: Install gem webmock
+        run: chef gem install webmock
+        env:
+          CHEF_LICENSE: accept-no-persist
+
+      # TODO: Find a way to not duplicate dependencies here by getting them installed from metadata.rb
+      - name: Install gem databricks
+        run: chef gem install databricks --version '~> 2.3'
+        env:
+          CHEF_LICENSE: accept-no-persist
+
+      # TODO: Find a way to not duplicate dependencies here by getting them installed from metadata.rb
+      - name: Install gem diffy
+        run: chef gem install diffy --version '~> 3.4'
+        env:
+          CHEF_LICENSE: accept-no-persist
+
+      - name: Run lint tests
+        run: delivery local lint
+        env:
+          CHEF_LICENSE: accept-no-persist
+
+      - name: Run unit tests
+        run: chef exec rspec
+        env:
+          CHEF_LICENSE: accept-no-persist
+
+  #     - name: Test packaging
+  #       run: bundle exec gem build databricks.gemspec
+
+  # semantic_release:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   steps:
+
+  #     - name: Check-out code
+  #       uses: actions/checkout@v2
+
+  #     - name: Install Ruby
+  #       uses: actions/setup-ruby@v1
+
+  #     - name: Install Node
+  #       uses: actions/setup-node@v2
+
+  #     - name: Install semantic-release
+  #       run: npm install @semantic-release/git @semantic-release/changelog @semantic-release/exec semantic-release-rubygem -D
+
+  #     - name: Install dependencies
+  #       run: bundle install
+
+  #     - name: Semantic releasing
+  #       run: npx semantic-release
+  #       env:
+  #         GEM_HOST_API_KEY: ${{secrets.GEM_HOST_API_KEY}}
