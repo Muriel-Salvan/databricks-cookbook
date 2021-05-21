@@ -1,3 +1,9 @@
+# [v0.1.3](https://github.com/Muriel-Salvan/databricks-cookbook/compare/v0.1.2...v0.1.3) (2021-05-21 17:07:14)
+
+### Patches
+
+* [Typo in releasing](https://github.com/Muriel-Salvan/databricks-cookbook/commit/7386ef97690b7e21bb9452235f9899cd17139b38)
+
 # [v0.1.2](https://github.com/Muriel-Salvan/databricks-cookbook/compare/v0.1.1...v0.1.2) (2021-05-21 17:01:20)
 
 ### Patches
