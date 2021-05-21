@@ -61,7 +61,7 @@ jobs:
         run: sudo gem install sem_ver_components
 
       - name: Generate key
-        run: echo "${CHEF_SUPERMARKET_KEY}" >supermarket.key
+        run: echo "${CHEF_SUPERMARKET_KEY}" >supermarket.pem
         env:
           CHEF_SUPERMARKET_KEY: ${{secrets.CHEF_SUPERMARKET_KEY}}
 
